@@ -8,3 +8,17 @@ describe 'restaurants index page' do
 		end
 	end
 end
+
+
+describe 'creating a restaurant' do 
+	it 'adds it to the restaurants index' do 
+		visit '/restaurants/new'
+		fill_in 'Name', with: 'McDonalds'
+		fill_in 'Address', with: '1 City Road, London'
+		click_button 'Create Restaurant'
+
+		expect(current_path).to have_content '/restaurants'
+		expect(page).to have_content 'McDonalds'
+ 	end
+
+end
