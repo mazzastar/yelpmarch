@@ -30,12 +30,24 @@ describe 'edit a restaurant' do
 	it 'edits an existing restaurant' do 
 		visit '/restaurants'
 		expect(page).to have_content("McDonalds")
-		click_on 'Edit McDonalds'
+		click_on 'Edit'
 		fill_in "Name", with: "KFC"
 		click_on 'Update'
 		expect(page).to have_content("KFC")
 
 	end
 
+
+end
+
+describe 'Remove a restaurant' do 
+	before(:each) do
+			Restaurant.create(name: 'McDonalds', address: "1 Highfield Road")
+	end
+	it 'deletes a restaurant' do
+		visit '/restaurants'
+		click_on 'Delete'
+		expect(page).to_not have_content('McDonalds')
+	end
 
 end
