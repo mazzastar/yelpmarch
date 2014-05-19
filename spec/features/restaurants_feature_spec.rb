@@ -22,3 +22,20 @@ describe 'creating a restaurant' do
  	end
 
 end
+
+describe 'edit a restaurant' do 
+		before(:each) do
+			Restaurant.create(name: 'McDonalds', address: "1 Highfield Road")
+  		end
+	it 'edits an existing restaurant' do 
+		visit '/restaurants'
+		expect(page).to have_content("McDonalds")
+		click_on 'Edit McDonalds'
+		fill_in "Name", with: "KFC"
+		click_on 'Update'
+		expect(page).to have_content("KFC")
+
+	end
+
+
+end
