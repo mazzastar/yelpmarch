@@ -4,7 +4,7 @@ describe Restaurant do
 	it 'is not valid without a name' do 
 		restaurant = Restaurant.new(name: nil)
 		expect(restaurant).not_to be_valid
-		expect(restaurant).to have(1).error_on(:name)
+		expect(restaurant).to have(2).error_on(:name)
 	end
 	
 	it 'is not valid without a address' do 
@@ -22,6 +22,12 @@ describe Restaurant do
 	it 'is not valid with an address that is too short' do 
 		restaurant = Restaurant.new( address: "1")
 		expect(restaurant).to have(1).errors_on(:cuisine)
+	end
+
+	it 'is not valid unless it starts with an uppercase letter' do 
+		restaurant = Restaurant.new(name: 'nandos')
+		expect(restaurant).to have(1).errors_on(:name)
+
 	end
 
 end
