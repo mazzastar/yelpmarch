@@ -1,5 +1,8 @@
 class Restaurant < ActiveRecord::Base
-	validates :name, :length => { :in => 1..255 }
-	validates :address, :length => { :in => 5..255 }
+	 validates :name, presence: true
+	 validates :address, presence: true, length:{ minimum: 3}
+	 validates :cuisine, presence: true
+
+	# validates :address, :length => { :in => 5..255 }
 
 end
