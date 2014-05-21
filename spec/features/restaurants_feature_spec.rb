@@ -23,32 +23,46 @@ describe 'creating a restaurant' do
 			expect(page).to have_content 'McDonalds'
 	 	end
  	end
- 	# context 'with invalid data' do 
- 	# 	it 'shows and error' do
-		# 	visit '/restaurants/new'
-		# 	fill_in 'Name', with: 'McDonalds'
-		# 	fill_in 'Address', with: '1'
-		# 	click_button 'Create Restaurant'
+ 	context 'with invalid data' do 
+ 		it 'shows and error' do
+			visit '/restaurants/new'
+			fill_in 'Name', with: 'McDonalds'
+			fill_in 'Address', with: '1'
+			fill_in 'Cuisine', with: 'Junk'
+			click_button 'Create Restaurant'
 
-		# 	expect(page).to have_content 'errors'
-		# end
- 	# end
+			expect(page).to have_content 'error'
+		end
+ 	end
 
 end
 
-describe 'edit a restaurant' do 
-		before(:each) do
-			Restaurant.create(name: 'McDonalds', address: "1 Highfield Road", cuisine: "Junk")
-  		end
-	it 'edits an existing restaurant' do 
-		visit '/restaurants'
-		expect(page).to have_content("McDonalds")
-		click_on 'Edit'
-		fill_in "Name", with: "KFC"
-		fill_in "Cuisine", with: "Chicken"
-		click_on 'Update'
-		expect(page).to have_content("KFC")
+describe 'editing a restaurant' do 
+	before(:each) do
+		Restaurant.create(name: 'McDonalds', address: "1 Highfield Road", cuisine: "Junk")
+  	end
 
+  	context 'with valid data' do	
+		it 'saves the changes to an existing restaurant' do 
+			visit '/restaurants'
+			expect(page).to have_content("McDonalds")
+			click_on 'Edit'
+			fill_in "Name", with: "KFC"
+			fill_in "Cuisine", with: "Chicken"
+			click_on 'Update'
+			expect(page).to have_content("KFC")
+
+		end
+	end
+
+	context 'with invalid data' do 
+		it 'displays an error' do 
+			visit '/restaurants'
+			click_link 'Edit'
+			fill_in 'Name', with: 'kfc'
+			click_on 'Update'
+			expect(page).to have_content "error"
+		end 
 	end
 
 
