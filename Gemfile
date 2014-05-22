@@ -29,9 +29,12 @@ gem 'spring',        group: :development
 group :development, :test do
   gem 'rspec-rails'
   gem 'capybara'
+  gem 'poltergeist'
+  gem 'database_cleaner'
 end
 
 gem 'bootstrap-sass'
+gem 'mustache'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

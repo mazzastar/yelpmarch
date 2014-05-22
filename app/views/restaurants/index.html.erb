@@ -1,3 +1,16 @@
+<template id="review_template">
+	<li> 
+	<strong>
+		{{ average_rating }} 
+
+	</strong>
+	 <strong>{{ star_rating }}</strong> - {{ thoughts }}
+	</li>
+
+</template>
+
+
+
 <%= notice %>
 
 <% if @restaurants.any? %>
@@ -10,8 +23,15 @@
 		 	<%= link_to "Review #{restaurant.name}", new_restaurant_review_path(restaurant) %> 
 		 <h4><%= pluralize restaurant.reviews.count, 'review' %> </h4>
 		 <h5>Average Rating:
-		 	<%= number_with_precision(restaurant.average_rating, precision:1) %>
-		 	<%= star_rating(restaurant.average_rating) %>
+		 	 
+		 	 <span class='average_rating_number'>
+		 	  <%= number_with_precision(restaurant.average_rating, precision: 1) %>
+		 	 </span>
+		 	 <span class = 'average_rating_stars'>
+		 	 	<%= star_rating(restaurant.average_rating) %>
+		 	 </span>
+
+
 		 </h5>
 
 		 <ul>
@@ -22,7 +42,7 @@
 		 	<% end %> 
 		 </ul>
 		 <%= render 'new_review', restaurant: restaurant %>
-
+		 </div>
 	<% end %> 
 <% else %>
 	No restaurants yet
