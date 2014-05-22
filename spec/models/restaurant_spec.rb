@@ -49,17 +49,20 @@ describe Restaurant do
 
 		end
 
-		context 'it has 2 review' do 
-			
+		context 'it has 2 reviews' do 
 			it 'returns the score of that review' do
 				restaurant.reviews.create(rating: 3) 
 				restaurant.reviews.create(rating: 5)
 				expect(restaurant.average_rating).to eq 4
 			end
+		end
 
-			it 'returns the score of that review' do
-				restaurant.reviews.create(rating: 3) 
-				restaurant.reviews.create(rating: 4)
+		context '>1 review' do 
+			before{ restaurant.reviews.create(rating: 3) 
+					restaurant.reviews.create(rating: 4)
+			}
+			
+			it 'returns a non-integer score of that review' do
 				expect(restaurant.average_rating).to eq 3.5
 			end
 

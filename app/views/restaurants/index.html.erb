@@ -11,15 +11,18 @@
 		 <h4><%= pluralize restaurant.reviews.count, 'review' %> </h4>
 		 <h5>Average Rating:
 		 	<%= number_with_precision(restaurant.average_rating, precision:1) %>
+		 	<%= star_rating(restaurant.average_rating) %>
 		 </h5>
 
 		 <ul>
 		 	<% restaurant.reviews.each do |review| %>
 		 		<li>
-		 			<%= review.rating %> - <%= review.thoughts %>
+		 			<strong> <%= star_rating(review.rating) %> </strong> - <%= review.thoughts %>
 		 		</li>
 		 	<% end %> 
 		 </ul>
+		 <%= render 'new_review', restaurant: restaurant %>
+
 	<% end %> 
 <% else %>
 	No restaurants yet
